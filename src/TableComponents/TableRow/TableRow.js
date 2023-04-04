@@ -2,17 +2,19 @@ import React from "react";
 import './TableRow.css';
 
 const TableRow = props => {
+    //console log 
+    console.log(props.item);
     return (
-        <tr key = {props.item.id}>
-            <td>{props.item.item}</td>
+        <tr key = {props.index}>
+            <td>{props.item.item_id}</td>
             <td>{props.item.category_id}</td>
             <td>{props.item.title}</td>
             <td>{props.item.description}</td>
             <td>{props.item.price}</td>
             <td>{props.item.sku}</td>
             <td>
-                <button onClick={() => props.editData(props.item)}>Edit</button>
-                <button onClick={() => props.deleteData(props.item)}>Delete</button>
+                <button className="edit" onClick={() => props.editItems(props.item)}>Edit</button>
+                <button className="delete" onClick={() => props.deleteItems(props.item)}>Delete</button>
             </td>
         </tr>        
     );

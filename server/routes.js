@@ -7,12 +7,14 @@ const router = express.Router();
 
 router.get("/items", ItemController.index);
 router.post("/items", ItemController.store);
-router.put("/items/:id", ItemController.update);
-router.delete("/items/:id", ItemController.destroy);
+router.put("/items/:item_id", ItemController.update);
+router.delete("/items/:item_id", ItemController.destroy);
+
+
 
 router.get("/categories", CategoryController.index);
 router.post("/categories", CategoryController.store);
-router.put("/categories/:id", CategoryController.update);
-router.delete("/categories/:id", CategoryController.destroy);
+router.put("/categories/:category_id", CategoryController.update);
+router.delete("/categories/:category_id", CategoryController.destroy);
 
 module.exports = router;

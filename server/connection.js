@@ -1,11 +1,10 @@
 const mysql = require("mysql"); 
 
 const conn = mysql.createConnection({
-    host: "127.0.0.1",
-    port: 8889,
+    host: "localhost",
     user: "root", 
-    password: "",
-    database: "reactdb"
+    password: 'test',
+    database: "react-project"
 });
 
 conn.connect();

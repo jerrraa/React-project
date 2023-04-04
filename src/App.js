@@ -3,88 +3,94 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import Table from './TableComponents/Table/Table';
-import AddForm from './FormComponents/AddForm/AddForm';
-import EditForm from './FormComponents/EditForm/EditForm';
+import AddForm from './FormComponets/AddForm/AddForm';
+import EditForm from './FormComponets/EditForm/EditForm';
+import { BrowserRouter as Router, Switch, Route, useLocation } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-
-
-const App = props => {
-
-  
-  const [data, setData] = useState([]);
+const App = () => {
+  const [items, setItems] = useState([]);
   const [editData, setEditData] = useState({});
   const [editing, setEditing] = useState(false);
   const [selectedData, setSelectedData] = useState({});
-  
+
   useEffect(() => {
-    let url = "http://127.0.0.1:3001/items";
-    axios.get(url).then(response => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/items");
+        setItems(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-      setData(response.data);
-    }).catch(error => {
-
-      console.log(error);
-    });
+    fetchData();
   }, []);
 
-  const addData = item => {
-    let url = "http://127.0.0.1:3001/items/";
-    axios.post(url, {
-      item: item
+  const addItems = item => {
+    axios
+      .post("http://localhost:3001/items/", item)
+      .then(response => {
+        reloadpage();
+        setItems(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+  
 
-    }).then(response => {
+  const updateItems = item => {
+    axios
+      .patch(`http://localhost:3001/items/${item.item_id}`, {
+        item: item
+      })
+      .then(response => {
+        setItems(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
-      setData(response.data);
-    }).catch(error => {
+  const deleteItems = item => {
+    console.log(item); // check the item object
+    axios
+      .delete(`http://localhost:3001/items/${item.item_id}`)
+      .then(response => {
+        setItems(response.data);
+        console.log("App _deleteData triggered");
+        reloadpage();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
-      console.log(error);
-    });
-  }
-
-  const updateData = item => {
-    let url = `http://127.0.0.1:3001/items/${item.id}`;
-    axios.patch(url, {
-      item: item
-    }).then(response => {
-        
-        setData(response.data);
-      }
-    ).catch(error => {
-      console.log(error);
-    }
-    );
-  }
-
-  const deleteData = item => {
-    let url = `http://127.0.0.1:3001/items/${item.id}`;
-    axios.delete(url, {
-
-      item: item
-    }).then(response => {
-      setData(response.data);
-
-    }).catch(error => {
-      console.log(error);
-    });
-
-  }
-
-  const _editData = item => {
-    setSelectedData(item);
-    setEditing(true);
-
-    console.log("App _editData triggered");
-  }
-
-
-  return (
-    <div className="App">
-      <header className="App-header">
-
-
-      </header>
-    </div>
-  );
+  const reloadpage = () => {
+    window.location.reload();
 }
 
+  const editItems = item => {
+    setSelectedData(item);
+    setEditing(true);
+    console.log("App _editData triggered");
+
+  };
+
+  console.log(items);
+  return (
+    
+    <div className="App">
+      <h1>ITEMS LIST</h1> 
+
+      <Table items={items} editItems={editItems} deleteItems={deleteItems} />
+      <AddForm addItems={addItems} />
+
+      
+    </div>
+  );
+};
+
 export default App;
+

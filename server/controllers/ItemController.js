@@ -15,7 +15,6 @@ module.exports = {
             });
         });
     },
-    //category_id, title, description, price, quantity, sku
     store: (req, res) => {
         const {category_id, title, description, price, quantity, sku} = req.body;
         db.query('INSERT INTO items (category_id, title, description, price, quantity, sku) VALUES (?, ?, ?, ?, ?, ?)', [category_id, title, description, price, quantity, sku], (err, results) => {
@@ -26,7 +25,7 @@ module.exports = {
                 });
             }
             res.json({
-                message: 'success',
+                message: 'stored',
                 data: results,
             });
         });
@@ -34,7 +33,7 @@ module.exports = {
     update: (req, res) => {
         const {id} = req.params;
         const {category_id, title, description, price, quantity, sku} = req.body;
-        db.query('UPDATE items SET category_id = ?, title = ?, description = ?, price = ?, quantity = ?, sku = ? WHERE id = ?', [category_id, title, description, price, quantity, sku, id], (err, results) => {
+        db.query('UPDATE items SET category_id = ?, title = ?, description = ?, price = ?, quantity = ?, sku = ? WHERE item_id = ?', [category_id, title, description, price, quantity, sku, id], (err, results) => {
             if (err) {
                 return res.status(500).json({
                     error: err.message,
@@ -42,14 +41,14 @@ module.exports = {
                 });
             }
             res.json({
-                message: 'success',
+                message: 'updated',
                 data: results,
             });
         });
     },
     destroy: (req, res) => {
-        const {id} = req.params;
-        db.query('DELETE FROM items WHERE id = ?', [id], (err, results) => {
+        const {item_id} = req.params;
+        db.query('DELETE FROM items WHERE item_id = ? <> 0', [item_id], (err, results) => {
             if (err) {
                 return res.status(500).json({
                     error: err.message,
@@ -57,7 +56,7 @@ module.exports = {
                 });
             }
             res.json({
-                message: 'success',
+                message: 'deleted',
                 data: results,
             });
         });
