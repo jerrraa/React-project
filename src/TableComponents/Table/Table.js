@@ -3,7 +3,7 @@ import TableRow from "../TableRow/TableRow";
 import './Table.css';
 
 const Table = (props) => {
-  console.log(props.items);
+  //console.log(props.items);
 
 
   //i had to do props.items.data as the data is in a object

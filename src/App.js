@@ -14,6 +14,8 @@ const App = () => {
   const [editing, setEditing] = useState(false);
   const [selectedData, setSelectedData] = useState({});
 
+  const [category, setCategories] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -78,14 +80,27 @@ const App = () => {
 
   };
 
-  console.log(items);
+ //get all categories table data
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/category");
+        setCategories(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+    
   return (
     
     <div className="App">
       <h1>ITEMS LIST</h1> 
 
       <Table items={items} editItems={editItems} deleteItems={deleteItems} />
-      <AddForm addItems={addItems} />
+      <AddForm category={category} addItems={addItems} />
 
       
     </div>

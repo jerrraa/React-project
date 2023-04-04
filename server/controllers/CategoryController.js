@@ -2,7 +2,7 @@ const db = require("../connection");
 
 module.exports = {
     index: (req, res) => {
-        db.query("SELECT * FROM categories", (err, results) => {
+        db.query("SELECT * FROM category", (err, results) => {
             if (err) {
                 return res.status(500).json({
                     error: err.message,
@@ -10,14 +10,14 @@ module.exports = {
                 });
             }
             res.json({
-                message: "success",
+                message: "category success",
                 data: results,
             });
         });
     },
     store: (req, res) => {
         const {name} = req.body;
-        db.query("INSERT INTO categories (name) VALUES (?)", [name], (err, results) => {
+        db.query("INSERT INTO category (name) VALUES (?)", [name], (err, results) => {
             if (err) {
                 return res.status(500).json({
                     error: err.message,
@@ -31,9 +31,9 @@ module.exports = {
         });
     },
     update: (req, res) => {
-        const {id} = req.params;
+        const {category_id} = req.params;
         const {name} = req.body;
-        db.query("UPDATE categories SET name = ? WHERE category_id = ?", [name, id], (err, results) => {
+        db.query("UPDATE category SET name = ? WHERE category_id = ?", [name, category_id], (err, results) => {
             if (err) {
                 return res.status(500).json({
                     error: err.message,
@@ -47,8 +47,8 @@ module.exports = {
         });
     },
     destroy: (req, res) => {
-        const {id} = req.params;
-        db.query("DELETE FROM categories WHERE category_id = ?", [id], (err, results) => {
+        const {category_id} = req.params;
+        db.query("DELETE FROM category WHERE category_id = ?", [id], (err, results) => {
             if (err) {
                 return res.status(500).json({
                     error: err.message,

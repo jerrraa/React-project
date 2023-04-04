@@ -59,9 +59,21 @@ const AddForm = props => {
                 <input type="text" name="title" id="title" value={title} onChange={_detectTitlechange} />
             </div>
             <div className="form-group">
-                <label htmlFor="category_id">Category ID: </label>
-                <input type="text" name="category_id" id="category_id" value={category_id} onChange={_detectCategory_idchange} />
+            <label htmlFor="title">Category ID: </label>
+            <select name="category_id" id="category_id" value={category_id} onChange={_detectCategory_idchange}>
+
+                {Array.isArray(props.category.data) && props.category.data.length > 0 ? (
+                    props.category.data.map((category) => (
+                        <option key={category.category_id} value={category.category_id}>{category.category_id}</option>
+                    ))
+                ) : (
+                    <option value="0">NO DATA IS AVALIABLE.</option>
+                )}
+            </select>
             </div>
+
+
+
             <div className="form-group">
                 <label htmlFor="description">Description: </label>
                 <input type="text" name="description" id="description" value={description} onChange={_detectDescriptionchange} />

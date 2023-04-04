@@ -12,9 +12,9 @@ router.delete("/items/:item_id", ItemController.destroy);
 
 
 
-router.get("/categories", CategoryController.index);
-router.post("/categories", CategoryController.store);
-router.put("/categories/:category_id", CategoryController.update);
-router.delete("/categories/:category_id", CategoryController.destroy);
+router.get("/category", CategoryController.index);
+router.post("/category", CategoryController.store);
+router.put("/category/:category_id", CategoryController.update);
+router.delete("/category/:category_id", CategoryController.destroy);
 
 module.exports = router;

@@ -2,8 +2,8 @@ import React from "react";
 import './TableRow.css';
 
 const TableRow = props => {
-    //console log 
-    console.log(props.item);
+    
+   // console.log(props.item);
     return (
         <tr key = {props.index}>
             <td>{props.item.item_id}</td>
