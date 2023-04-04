@@ -52,7 +52,7 @@ const AddForm = props => {
 
     return (
         <><hr />
-        <h2>Add Item</h2>
+        <h1>Add Item</h1>
         <form className="add-form" onSubmit={handleSubmit}>
             <div className="form-group">
                 <label htmlFor="title">Title: </label>
@@ -88,11 +88,10 @@ const AddForm = props => {
                 <label htmlFor="sku">SKU: </label>
                 <input type="text" name="sku" id="sku" value={sku} onChange={_detectSkuchange} />
             </div>
-            <Button className="btn btn-primary" type="submit" text="Add Item" />
-        </form></>
+            <Button className="btn btn-primary" type="submit" text="Add to Database" />
+        </form><hr /></>
 
      
-
     );
 }
 

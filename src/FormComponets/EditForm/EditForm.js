@@ -21,7 +21,9 @@ const EditForm = props => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.editItems({title, description, price, category_id, quantity, sku});
+
+        //still having problems trying to update the item so i'll leave it blank.
+
       };
 
     const _detectTitlechange = e => {
@@ -50,9 +52,52 @@ const EditForm = props => {
 
     console.log(props.selectedData);
     return (
-        <div>
-            <h2>Edit Item</h2>
-        </div>
+        <><div>
+            <hr />
+            <h1>Edit Item</h1>
+
+            <form className="edit-form" onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label htmlFor="title">Title: </label>
+                    <input type="text" name="title" id="title" value={title} onChange={_detectTitlechange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="category_id">Category ID: </label>
+                    <select name="category_id" id="category_id" value={category_id} onChange={_detectCategory_idchange}>
+                        <option value="0">Select Category</option>
+                        {Array.isArray(props.category.data) && props.category.data.length > 0 ? (
+                            props.category.data.map((category) => (
+                                <option key={category.category_id} value={category.category_id}>{category.category_id}</option>
+                            ))
+                        ) : (
+                            <option value="0">NO DATA IS AVALIABLE.</option>
+                        )}
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Description: </label>
+                    <input type="text" name="description" id="description" value={description} onChange={_detectDescriptionchange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="price">Price: </label>
+                    <input type="text" name="price" id="price" value={price} onChange={_detectPricechange} />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="quantity">Quantity: </label>
+                    <input type="text" name="quantity" id="quantity" value={quantity} onChange={_detectQuantitychange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="sku">SKU: </label>
+                    <input type="text" name="sku" id="sku" value={sku} onChange={_detectSkuchange} />
+                </div>
+                <Button type="submit" text="Edit Item" />
+            </form>
+
+
+
+
+        </div><hr /></>
     );
 }
 
