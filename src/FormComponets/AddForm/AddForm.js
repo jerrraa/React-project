@@ -61,7 +61,7 @@ const AddForm = props => {
             <div className="form-group">
             <label htmlFor="title">Category ID: </label>
             <select name="category_id" id="category_id" value={category_id} onChange={_detectCategory_idchange}>
-
+            <option value="0">Select Category</option>
                 {Array.isArray(props.category.data) && props.category.data.length > 0 ? (
                     props.category.data.map((category) => (
                         <option key={category.category_id} value={category.category_id}>{category.category_id}</option>
@@ -71,8 +71,6 @@ const AddForm = props => {
                 )}
             </select>
             </div>
-
-
 
             <div className="form-group">
                 <label htmlFor="description">Description: </label>

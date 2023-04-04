@@ -31,9 +31,9 @@ module.exports = {
         });
     },
     update: (req, res) => {
-        const {id} = req.params;
+        const {item_id} = req.params;
         const {category_id, title, description, price, quantity, sku} = req.body;
-        db.query('UPDATE items SET category_id = ?, title = ?, description = ?, price = ?, quantity = ?, sku = ? WHERE item_id = ?', [category_id, title, description, price, quantity, sku, id], (err, results) => {
+        db.query('UPDATE items SET category_id = ?, title = ?, description = ?, price = ?, quantity = ?, sku = ? WHERE item_id = ?', [category_id, title, description, price, quantity, sku, item_id], (err, results) => {
             if (err) {
                 return res.status(500).json({
                     error: err.message,

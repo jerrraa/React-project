@@ -49,6 +49,7 @@ const App = () => {
       })
       .then(response => {
         setItems(response.data);
+        reloadpage();
       })
       .catch(error => {
         console.log(error);
@@ -101,7 +102,15 @@ const App = () => {
 
       <Table items={items} editItems={editItems} deleteItems={deleteItems} />
       <AddForm category={category} addItems={addItems} />
-
+      {editing ? (
+        <EditForm
+          selectedData={selectedData}
+          updateItems={updateItems}
+          category={category}
+        />
+      ) : (
+        <div></div>
+      )}
       
     </div>
   );
