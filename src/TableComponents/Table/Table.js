@@ -35,7 +35,7 @@ const Table = (props) => {
             ))
           ) : (
             <tr>
-              <td colSpan="6">NO DATA IS AVALIABLE.</td>
+              <td colSpan="6"></td>
             </tr>
           )}
         </tbody>

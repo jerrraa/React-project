@@ -11,13 +11,13 @@ const EditForm = props => {
     const [sku, setSku] = useState("");
 
     useEffect(() => {
-        setTitle(props.selectedData.title);
-        setDescription(props.selectedData.description);
-        setPrice(props.selectedData.price);
-        setCategory_id(props.selectedData.category_id);
-        setQuantity(props.selectedData.quantity);
-        setSku(props.selectedData.sku);
-    }, [props.selectedData]);
+        setTitle(props.selectedItem.title);
+        setDescription(props.selectedItem.description);
+        setPrice(props.selectedItem.price);
+        setCategory_id(props.selectedItem.category_id);
+        setQuantity(props.selectedItem.quantity);
+        setSku(props.selectedItem.sku);
+    }, [props.selectedItem]);
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -50,7 +50,7 @@ const EditForm = props => {
         setSku(e.target.value);
     }
 
-    console.log(props.selectedData);
+    console.log(props.selectedItem);
     return (
         <><div>
             <hr />
@@ -62,12 +62,12 @@ const EditForm = props => {
                     <input type="text" name="title" id="title" value={title} onChange={_detectTitlechange} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="category_id">Category ID: </label>
+                    <label htmlFor="category_id">Category: </label>
                     <select name="category_id" id="category_id" value={category_id} onChange={_detectCategory_idchange}>
                         <option value="0">Select Category</option>
                         {Array.isArray(props.category.data) && props.category.data.length > 0 ? (
                             props.category.data.map((category) => (
-                                <option key={category.category_id} value={category.category_id}>{category.category_id}</option>
+                                <option key={category.category_id} value={category.category_id}>{category.name}</option>
                             ))
                         ) : (
                             <option value="0">NO DATA IS AVALIABLE.</option>

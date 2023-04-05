@@ -48,7 +48,7 @@ module.exports = {
     },
     destroy: (req, res) => {
         const {category_id} = req.params;
-        db.query("DELETE FROM category WHERE category_id = ?", [id], (err, results) => {
+        db.query("DELETE FROM category WHERE category_id = ?", [category_id], (err, results) => {
             if (err) {
                 return res.status(500).json({
                     error: err.message,

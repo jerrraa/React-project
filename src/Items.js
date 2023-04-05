@@ -11,9 +11,8 @@ const Item = () => {
   const [items, setItems] = useState([]);
   const [editData, setEditData] = useState({});
   const [editing, setEditing] = useState(false);
-  const [selectedData, setSelectedData] = useState({});
+  const [selectedItem, setSelectedItem] = useState({});
   const [adding , setAdding] = useState(false);
-
 
   const [category, setCategories] = useState([]);
 
@@ -81,7 +80,7 @@ const Item = () => {
   };
 
   const editItems = item => {
-    setSelectedData(item);
+    setSelectedItem(item);
     setEditing(true);
     console.log("App _editData triggered");
 
@@ -110,7 +109,7 @@ const Item = () => {
     ) : editing ? (
 
       <EditForm
-        selectedData={selectedData}
+        selectedItem={selectedItem}
         updateItems={updateItems}
         category={category}
       />
