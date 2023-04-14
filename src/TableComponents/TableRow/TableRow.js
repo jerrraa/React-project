@@ -11,6 +11,7 @@ const TableRow = props => {
             <td>{props.item.title}</td>
             <td>{props.item.description}</td>
             <td>{props.item.price}</td>
+            <td>{props.item.quantity}</td>
             <td>{props.item.sku}</td>
             <td>
                 <button className="edit" onClick={() => props.editItems(props.item)}>Edit</button>

@@ -3,6 +3,7 @@ import './EditForm.css';
 import Button from "../Button/Button";
 
 const EditForm = props => {
+    const [item_id, setID] = useState('');
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
@@ -11,6 +12,7 @@ const EditForm = props => {
     const [sku, setSku] = useState("");
 
     useEffect(() => {
+        setID(props.selectedItem.item_id);
         setTitle(props.selectedItem.title);
         setDescription(props.selectedItem.description);
         setPrice(props.selectedItem.price);
@@ -19,12 +21,13 @@ const EditForm = props => {
         setSku(props.selectedItem.sku);
     }, [props.selectedItem]);
     
-    const handleSubmit = (e) => {
+    const _edit = (e) => {
         e.preventDefault();
-
+        const item = { item_id, title, description, price, category_id, quantity, sku };
         //still having problems trying to update the item so i'll leave it blank.
+        props.editItems(item);
 
-      };
+    }
 
     const _detectTitlechange = e => {
         setTitle(e.target.value);
@@ -56,7 +59,7 @@ const EditForm = props => {
             <hr />
             <h1>Edit Item</h1>
 
-            <form className="edit-form" onSubmit={handleSubmit}>
+            <form className="edit-form" onSubmit={_edit}>
                 <div className="form-group">
                     <label htmlFor="title">Title: </label>
                     <input type="text" name="title" id="title" value={title} onChange={_detectTitlechange} />

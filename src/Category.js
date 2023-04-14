@@ -43,8 +43,9 @@ const Category = props => {
     };
 
     const updateCategory = category => {
+        console.log("presseeddd")
         axios.patch(`http://localhost:3001/category/${category.category_id}`, {
-            category: category
+            name: category.name
         })
         .then(response => {
             setCategories(response.data);
@@ -96,6 +97,7 @@ const Category = props => {
       <CategoryEditForm
         selectedCategory={edit}
         setEditing={setEditing}
+        editCategory={updateCategory}
       />
     ) : (
       <div>

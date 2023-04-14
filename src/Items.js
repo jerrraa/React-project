@@ -45,7 +45,12 @@ const Item = () => {
   const updateItems = item => {
     axios
       .patch(`http://localhost:3001/items/${item.item_id}`, {
-        item: item
+        category_id: item.category_id,
+        title: item.title,
+        description: item.description,
+        price: item.price,
+        quantity: item.quantity,
+        sku: item.sku
       })
       .then(response => {
         setItems(response.data);
@@ -110,7 +115,8 @@ const Item = () => {
 
       <EditForm
         selectedItem={selectedItem}
-        updateItems={updateItems}
+        setEditing={setEditing}
+        editItems={updateItems}
         category={category}
       />
     ) : (

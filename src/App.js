@@ -4,7 +4,6 @@ import axios from "axios";
 //router for items
 import Items from "./Items";
 import Category from "./Category";
-import logo from './logo.svg';
 import './App.css';
 
 //i couldn't use switch or router as it kept crashing my program.
